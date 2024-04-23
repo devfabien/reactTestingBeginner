@@ -12,5 +12,9 @@ describe("Terms and Conditions", () => {
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toBeInTheDocument();
     expect(checkbox).not.toBeChecked();
+
+    const button = screen.getByRole("button");
+    expect(button).toBeInTheDocument();
+    expect(button).toBeDisabled();
   });
 });
