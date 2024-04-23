@@ -8,5 +8,9 @@ describe("Terms and Conditions", () => {
     const heading = screen.getByRole("heading");
     expect(heading).toBeInTheDocument();
     expect(heading).toHaveTextContent("Terms & Conditions");
+
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toBeInTheDocument();
+    expect(checkbox).not.toBeChecked();
   });
 });
