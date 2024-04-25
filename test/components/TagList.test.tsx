@@ -5,9 +5,12 @@ describe("Taglist", () => {
   it("should render the component", async () => {
     render(<TagList />);
 
-    await waitFor(() => {
-      const listItems = screen.getAllByRole("listitem");
-      expect(listItems.length).toBeGreaterThan(0);
-    });
+    // await waitFor(() => {
+    //   const listItems = screen.getAllByRole("listitem");
+    //   expect(listItems.length).toBeGreaterThan(0);
+    // });
+
+    const listItems = await screen.findAllByRole("listitem");
+    expect(listItems.length).toBeGreaterThan(0);
   });
 });
