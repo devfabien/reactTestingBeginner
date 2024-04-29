@@ -3,6 +3,10 @@ import ResizeObserver from "resize-observer-polyfill";
 
 global.ResizeObserver = ResizeObserver;
 
+window.HTMLElement.prototype.scrollIntoView = vi.fn();
+window.HTMLElement.prototype.hasPointerCapture = vi.fn();
+window.HTMLElement.prototype.releasePointerCapture = vi.fn();
+
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({
