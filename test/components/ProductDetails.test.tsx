@@ -18,7 +18,13 @@ describe("Product Details", () => {
     server.use(http.get("/products/1", () => HttpResponse.json(null)));
 
     render(<ProductDetail productId={1} />);
-    const message = await screen.findByText(/not found/);
+    const message = await screen.findByText(/not found/i);
+    expect(message).toBeInTheDocument();
+  });
+  it("should render an error for invalid productId", async () => {
+    render(<ProductDetail productId={0} />);
+
+    const message = await screen.findByText(/invalid/i);
     expect(message).toBeInTheDocument();
   });
 });
