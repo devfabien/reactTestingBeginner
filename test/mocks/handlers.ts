@@ -1,5 +1,6 @@
 import { http, HttpResponse } from "msw";
-import { products } from "./data";
+import { db } from "./db";
+// import { products } from "./data";
 
 export const handlers = [
   http.get("/categories", () => {
@@ -9,13 +10,15 @@ export const handlers = [
       { id: 3, name: "Accesories" },
     ]);
   }),
-  http.get("/products", () => {
-    return HttpResponse.json(products);
-  }),
-  http.get("/products/:id", ({ params }) => {
-    const id = parseInt(params.id as string);
-    const product = products.find((product) => product.id === id);
-    if (!product) return new HttpResponse(null, { status: 404 });
-    return HttpResponse.json(product);
-  }),
+  ...db.product.toHandlers("rest"),
+
+  // http.get("/products", () => {
+  //   return HttpResponse.json(products);
+  // }),
+  // http.get("/products/:id", ({ params }) => {
+  //   const id = parseInt(params.id as string);
+  //   const product = products.find((product) => product.id === id);
+  //   if (!product) return new HttpResponse(null, { status: 404 });
+  //   return HttpResponse.json(product);
+  // }),
 ];
