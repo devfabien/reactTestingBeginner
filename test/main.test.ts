@@ -1,5 +1,4 @@
-import { it, expect, describe } from "vitest";
-import { faker } from "@faker-js/faker";
+import { describe, expect, it } from "vitest";
 import { db } from "./mocks/db";
 
 describe("Main", () => {
@@ -14,6 +13,6 @@ describe("Main", () => {
   });
   it("should check fakerjs", () => {
     const product = db.product.create({ name: "Apple" });
-    console.log(product);
+    console.log(db.product.delete({ where: { id: { equals: product.id } } }));
   });
 });
