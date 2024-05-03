@@ -1,5 +1,6 @@
 import { it, expect, describe } from "vitest";
 import { faker } from "@faker-js/faker";
+import { db } from "./mocks/db";
 
 describe("Main", () => {
   it("should check for truthy value", () => {
@@ -12,9 +13,7 @@ describe("Main", () => {
     expect(data).toHaveLength(3);
   });
   it("should check fakerjs", () => {
-    console.log({
-      name: faker.commerce.productName(),
-      price: faker.commerce.price({ min: 1, max: 100 }),
-    });
+    const product = db.product.create();
+    console.log(product);
   });
 });
