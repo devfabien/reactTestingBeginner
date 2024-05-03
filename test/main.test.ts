@@ -13,7 +13,7 @@ describe("Main", () => {
     expect(data).toHaveLength(3);
   });
   it("should check fakerjs", () => {
-    const product = db.product.create();
+    const product = db.product.create({ name: "Apple" });
     console.log(product);
   });
 });
