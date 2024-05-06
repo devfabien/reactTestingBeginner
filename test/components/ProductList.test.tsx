@@ -1,4 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import ProductList from "../../src/components/ProductList";
 import { server } from "../mocks/server";
 import { HttpResponse, delay, http } from "msw";
@@ -50,5 +54,10 @@ describe("Product list", () => {
     render(<ProductList />);
 
     expect(await screen.findByText(/loading/i)).toBeInTheDocument();
+  });
+  it("should remove a loading indicator after data is fetched successfully", async () => {
+    render(<ProductList />);
+
+    await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
   });
 });
