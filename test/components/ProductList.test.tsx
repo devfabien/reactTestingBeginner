@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ProductList from "../../src/components/ProductList";
 import { server } from "../mocks/server";
-import { HttpResponse, http } from "msw";
+import { HttpResponse, delay, http } from "msw";
 import { db } from "../mocks/db";
 
 describe("Product list", () => {
@@ -38,5 +38,17 @@ describe("Product list", () => {
     render(<ProductList />);
 
     expect(await screen.findByText(/error/i)).toBeInTheDocument();
+  });
+  it("should render a loading indicator when fetching the data", async () => {
+    server.use(
+      http.get("/products", async () => {
+        await delay();
+        return HttpResponse.json([]);
+      })
+    );
+
+    render(<ProductList />);
+
+    expect(await screen.findByText(/loading/i)).toBeInTheDocument();
   });
 });
