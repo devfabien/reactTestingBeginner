@@ -60,4 +60,11 @@ describe("Product list", () => {
 
     await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
   });
+  it("should remove a loading indicator if data fetching fails", async () => {
+    server.use(http.get("/products", () => HttpResponse.error()));
+
+    render(<ProductList />);
+
+    await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
+  });
 });
